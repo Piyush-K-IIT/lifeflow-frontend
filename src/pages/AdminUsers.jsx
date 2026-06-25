@@ -1,3 +1,4 @@
+import UserModal from "../components/admin/users/UserModal";
 import React, { useEffect, useState } from "react";
 import API from "../api/axios";
 
@@ -8,6 +9,10 @@ const AdminUsers = () => {
   const [search, setSearch] = useState("");
   const [role, setRole] = useState("");
   const [status, setStatus] = useState("");
+
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  const [openModal, setOpenModal] = useState(false);
 
   const fetchUsers = async () => {
     try {
@@ -28,6 +33,22 @@ const AdminUsers = () => {
       setLoading(false);
     }
   };
+
+  const viewUser = async (id) => {
+  try {
+
+    const res = await API.get(`/admin/users/${id}`);
+
+    setSelectedUser(res.data.user);
+
+    setOpenModal(true);
+
+  } catch (error) {
+
+    console.error("Failed to fetch user:", error);
+
+  }
+};
 
   useEffect(() => {
     fetchUsers();
@@ -149,9 +170,13 @@ const AdminUsers = () => {
                   Location
                 </th>
 
-                <th className="text-left px-6 py-4">
-                  Status
-                </th>
+<th className="text-left px-6 py-4">
+  Status
+</th>
+
+<th className="text-left px-6 py-4">
+  Actions
+</th>
 
               </tr>
 
@@ -164,7 +189,7 @@ const AdminUsers = () => {
                 <tr>
 
                   <td
-                    colSpan="6"
+                    colSpan="7"
                     className="
                       text-center
                       py-10
@@ -219,27 +244,47 @@ const AdminUsers = () => {
 
                     </td>
 
-                    <td className="px-6 py-5">
-                      {user.location}
-                    </td>
+<td className="px-6 py-5">
+  {user.location}
+</td>
 
-                    <td className="px-6 py-5">
+<td className="px-6 py-5">
 
-                      {user.isBlocked ? (
+  {user.isBlocked ? (
 
-                        <span className="text-red-600 font-bold">
-                          Blocked
-                        </span>
+    <span className="text-red-600 font-bold">
+      Blocked
+    </span>
 
-                      ) : (
+  ) : (
 
-                        <span className="text-green-600 font-bold">
-                          Active
-                        </span>
+    <span className="text-green-600 font-bold">
+      Active
+    </span>
 
-                      )}
+  )}
 
-                    </td>
+</td>
+
+<td className="px-6 py-5">
+
+  <button
+    onClick={() => viewUser(user._id)}
+    className="
+      bg-blue-600
+      hover:bg-blue-700
+      text-white
+      px-4
+      py-2
+      rounded-lg
+      transition-all
+    "
+  >
+    View
+  </button>
+
+</td>
+                    
 
                   </tr>
 
