@@ -8,7 +8,7 @@ import {
   FileBarChart2,
   Bell,
   Settings,
-  LogOut
+  LogOut,
 } from "lucide-react";
 
 const Sidebar = () => {
@@ -17,39 +17,39 @@ const Sidebar = () => {
   const menu = [
     {
       title: "Dashboard",
-      icon: <LayoutDashboard size={20} />,
-      path: "/admin-dashboard"
+      icon: <LayoutDashboard size={18} />,
+      path: "/admin-dashboard",
     },
     {
       title: "Users",
-      icon: <Users size={20} />,
-      path: "/admin/users"
+      icon: <Users size={18} />,
+      path: "/admin/users",
     },
     {
       title: "Hospitals",
-      icon: <Building2 size={20} />,
-      path: "/admin/hospitals"
+      icon: <Building2 size={18} />,
+      path: "/admin/hospitals",
     },
     {
       title: "Blood Requests",
-      icon: <Activity size={20} />,
-      path: "/admin/requests"
+      icon: <Activity size={18} />,
+      path: "/admin/requests",
     },
     {
       title: "Reports",
-      icon: <FileBarChart2 size={20} />,
-      path: "/admin/reports"
+      icon: <FileBarChart2 size={18} />,
+      path: "/admin/reports",
     },
     {
       title: "Notifications",
-      icon: <Bell size={20} />,
-      path: "/admin/notifications"
+      icon: <Bell size={18} />,
+      path: "/admin/notifications",
     },
     {
       title: "Settings",
-      icon: <Settings size={20} />,
-      path: "/admin/settings"
-    }
+      icon: <Settings size={18} />,
+      path: "/admin/settings",
+    },
   ];
 
   const handleLogout = () => {
@@ -59,62 +59,58 @@ const Sidebar = () => {
   };
 
   return (
-    <aside className="w-72 h-screen bg-gray-900 text-white flex flex-col sticky top-0">
+    <aside className="w-52 h-screen bg-white border-r border-gray-200 shadow-sm flex flex-col sticky top-0">
 
-      <div className="p-8 border-b border-gray-700">
-
-        <h1 className="text-3xl font-black">
-          Life<span className="text-red-500">Flow</span>
-        </h1>
-
-        <p className="text-gray-400 mt-2">
-          Admin Control Center
+      {/* Sidebar Header */}
+      <div className="px-5 py-6 border-b border-gray-200">
+        <p className="text-sm font-semibold uppercase tracking-wider text-gray-500">
+          Admin Panel
         </p>
-
       </div>
 
-      <nav className="flex-1 mt-6 px-3">
+      {/* Navigation */}
+      <nav className="flex-1 mt-4 px-3">
 
         {menu.map((item) => (
-
           <NavLink
             key={item.title}
             to={item.path}
             className={({ isActive }) =>
-              `flex items-center gap-4 px-5 py-4 rounded-xl mb-2 transition-all duration-200 ${
+              `flex items-center gap-3 px-4 py-3 rounded-xl mb-2 transition-all duration-200 ${
                 isActive
-                  ? "bg-red-600 text-white shadow-lg"
-                  : "text-gray-300 hover:bg-gray-800 hover:text-white"
+                  ? "bg-red-50 text-red-600 border border-red-200 shadow-sm"
+                  : "text-gray-600 hover:bg-red-50 hover:text-red-600"
               }`
             }
           >
             {item.icon}
-            <span className="font-semibold">
+
+            <span className="font-medium text-[15px]">
               {item.title}
             </span>
           </NavLink>
-
         ))}
 
       </nav>
 
-      <div className="border-t border-gray-700 p-6">
+      {/* Footer */}
+      <div className="border-t border-gray-200 p-5">
 
-        <div className="mb-6">
+        <div className="mb-5">
 
-          <p className="text-sm text-gray-400">
+          <p className="text-xs text-gray-500">
             Logged in as
           </p>
 
-          <p className="font-bold text-lg">
+          <p className="font-semibold text-base text-gray-800 mt-1">
             Administrator
           </p>
 
           <div className="flex items-center gap-2 mt-2">
 
-            <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+            <div className="w-2 h-2 rounded-full bg-green-500"></div>
 
-            <span className="text-sm text-gray-300">
+            <span className="text-sm text-gray-600">
               Online
             </span>
 
@@ -129,16 +125,18 @@ const Sidebar = () => {
             flex
             items-center
             justify-center
-            gap-3
+            gap-2
             py-3
             rounded-xl
-            bg-red-600
-            hover:bg-red-700
+            border
+            border-red-500
+            text-red-600
+            hover:bg-red-50
             transition-all
             font-semibold
           "
         >
-          <LogOut size={20} />
+          <LogOut size={18} />
           Logout
         </button>
 
